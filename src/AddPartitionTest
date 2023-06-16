@@ -1,0 +1,25 @@
+import sys
+from awsglue.transforms import *
+from awsglue.utils import getResolvedOptions
+from pyspark.context import SparkContext
+from awsglue.context import GlueContext
+from awsglue.job import Job
+
+## @params: [JOB_NAME]
+args = getResolvedOptions(sys.argv, ['JOB_NAME'])
+
+sc = SparkContext()
+glueContext = GlueContext(sc)
+spark = glueContext.spark_session
+job = Job(glueContext)
+job.init(args['JOB_NAME'], args)
+## @type: DataSource
+## @args: [database = "trxdetails", table_name = "daily_transactions", transformation_ctx = "datasource0"]
+## @return: datasource0
+## @inputs: []
+datasource0 = glueContext.create_dynamic_frame.from_catalog(database = "trxdetails", table_name = "daily_transactions", transformation_ctx = "datasource0")
+
+# spark.sql("select count(*) from daily_transactions").show()
+spark.sql("ALTER TABLE daily_transactions ADD IF NOT EXISTS PARTITION (br_num='998', acc_code='9876', account_group='999')").show()
+
+job.commit()

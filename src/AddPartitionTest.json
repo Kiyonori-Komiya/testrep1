@@ -1,0 +1,33 @@
+{
+  "name" : "AddPartitionTest",
+  "description" : "",
+  "role" : "arn:aws:iam::672895418213:role/service-role/AWSGlueServiceRole-GlueJobTest",
+  "executionProperty" : {
+    "maxConcurrentRuns" : 1
+  },
+  "command" : {
+    "name" : "glueetl",
+    "scriptLocation" : "s3://athena-test1-knkwd/glue_work/script/AddPartitionTest",
+    "pythonVersion" : "3"
+  },
+  "defaultArguments" : {
+    "--job-bookmark-option" : "job-bookmark-disable",
+    "--enable-job-insights" : "true",
+    "--job-language" : "python",
+    "--TempDir" : "s3://athena-test1-knkwd/glue_work/temp"
+  },
+  "maxRetries" : 0,
+  "allocatedCapacity" : 10,
+  "timeout" : 2880,
+  "maxCapacity" : 10.0,
+  "glueVersion" : "2.0",
+  "numberOfWorkers" : 10,
+  "workerType" : "G.1X",
+  "executionClass" : "STANDARD",
+  "sourceControlDetails" : {
+    "provider" : "GITHUB",
+    "repository" : "testrep1",
+    "branch" : "main",
+    "folder" : "src"
+  }
+}
