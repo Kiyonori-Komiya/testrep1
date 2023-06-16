@@ -10,7 +10,9 @@ args = getResolvedOptions(sys.argv, ['JOB_NAME'])
 
 #
 # add comment
+#
 # new comment in glue studio
+# another comment in glue studio
 #
 sc = SparkContext()
 glueContext = GlueContext(sc)
